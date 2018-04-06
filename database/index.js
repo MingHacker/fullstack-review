@@ -8,25 +8,34 @@ db.once('open', ()=>{
 });
 
 let repoSchema = mongoose.Schema({
-  // TODO: your schema here!
   name: String,
-  repo_name: String,
-  url: String,
-  description: String,
-  forks: Number,
-  watchers: Number
+  repo_count: Number,
+  repos: [
+    {
+      repo_name: String,
+      url: String,
+      description: String,
+      forks: Number,
+      watchers: Number
+    }
+  ]
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
 
 // repo creation test
 let moRepo = new Repo({ 
-  name: 'Mo', 
-  repo_name: 'hrsf93', 
-  url:'http://github.com/2000prcs', 
-  description: 'Mo\'s Hack Reactor Github',
-  forks: 7777,
-  watchers: 777
+  name: 'Mo',
+  repo_count: 7, 
+  repos: [ 
+    {
+      repo_name: 'hrsf93', 
+      url:'http://github.com/2000prcs', 
+      description: 'Mo\'s Hack Reactor Github',
+      forks: 7777,
+      watchers: 777
+    }
+  ]
 });
 
 let save = moRepo.save((err, moRepo) => {

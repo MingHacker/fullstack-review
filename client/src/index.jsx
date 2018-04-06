@@ -15,7 +15,24 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+
+    var userData = {term};
+    // send the github handle to the server 
+    $.ajax({
+      method: 'POST',
+      // if url is not exactly same as '127.0.0.1' -> it will show cross-origin-allow error
+      url: 'http://127.0.0.1:1128/repos',
+      data: JSON.stringify(userData),
+      headers: {
+        'content-type': 'application/json'
+      },
+      success: (data) => {
+        console.log('Data sent. Respond from POST: ', data);
+      },
+      error: (error) => {
+        console.log('POST: Data was not sent', error);
+      }
+    })
   }
 
   render () {

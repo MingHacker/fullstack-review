@@ -20,7 +20,7 @@ let getReposByUsername = (username) => {
   };
 
   let callback = (error, response, body) => {
-    console.log(response.statusCode);
+    console.log('statuscode: ', response.statusCode);
     if(!error && response.statusCode === 200){
       let info = JSON.parse(body);
       // save the repo information in the database

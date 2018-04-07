@@ -1,5 +1,7 @@
 const request = require('request');
-const config = require('../config.js');
+//const config = require('../config.js');
+// Heroku config
+const gitToken = process.env['TOKEN'];
 
 let db = require('../database/index.js');
 
@@ -15,7 +17,8 @@ let getReposByUsername = (username) => {
     url: 'https://api.github.com/users' + '/' + username + '/repos',
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${gitToken}`
+      //'Authorization': `token ${config.TOKEN}`
     }
   };
 

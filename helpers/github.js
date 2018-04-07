@@ -24,7 +24,12 @@ let getReposByUsername = (username) => {
     if(!error && response.statusCode === 200){
       let info = JSON.parse(body);
       // save the repo information in the database
-      db.save(info); 
+      console.log('Info from github:', info);
+      if(info.length > 0){
+        db.save(info); 
+      } else {
+        console.log('No Public Repos for the User');
+      }
     }
   };
 

@@ -28,9 +28,29 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('Data sent. Respond from POST: ', data);
+        this.renderRepos(data);
       },
       error: (error) => {
         console.log('POST: Data was not sent', error);
+      }
+    })
+  }
+
+  // fetch all user repos from DB 
+  renderRepos(data){
+    $.ajax({
+      method: 'GET',
+      // if url is not exactly same as '127.0.0.1' -> it will show cross-origin-allow error
+      url: 'http://127.0.0.1:1128/repos',
+      headers: {
+        'content-type': 'application/json'
+      },
+      success: (data) => {
+        console.log('Data sent. Respond from GET: ', data);
+        this.setState({repos: data});
+      },
+      error: (error) => {
+        console.log('GET: Data was not sent', error);
       }
     })
   }

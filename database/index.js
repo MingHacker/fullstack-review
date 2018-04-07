@@ -73,9 +73,15 @@ let save = (info) => {
 
 };
 
-let find = Repo.find((err, repos)=>{
+// find all info from DB 
+let find = function(callback) {
+  Repo.find((err, repos)=>{
   if(err) return console.error(err);
   console.log('repos: ', repos);
-});
+  callback(repos);
+  });
+}
+
 
 module.exports.save = save;
+module.exports.find = find;

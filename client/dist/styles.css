@@ -1,0 +1,24 @@
+table {
+    margin-top: 10px;
+    font-family: monospace;
+}
+
+th {
+    border: solid 1px black;
+    color: red;
+}
+
+td {
+    border: solid 1px black;
+}
+
+h1 {
+    color: pink;
+    text-decoration: underline;
+    font-family: monospace;
+}
+
+#user {
+    font-weight: bold;
+    margin: 10px 10px;
+}

@@ -8,11 +8,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      repos: []
+      userRepos: []
     }
 
   }
 
+  // POST reqest to the server 
   search (term) {
     console.log(`${term} was searched`);
 
@@ -47,7 +48,7 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('Data sent. Respond from GET: ', data);
-        this.setState({repos: data});
+        this.setState({userRepos: data});
       },
       error: (error) => {
         console.log('GET: Data was not sent', error);
@@ -56,12 +57,14 @@ class App extends React.Component {
   }
 
   render () {
-    return (<div>
-      <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
-      <Search onSearch={this.search.bind(this)}/>
-    </div>)
-  }
+    return (
+      <div>
+        <h1>Mo's Github Fetcher</h1>
+        <RepoList userRepos={this.state.userRepos}/>
+        <Search onSearch={this.search.bind(this)}/>
+    </div>
+    )
+  };
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));

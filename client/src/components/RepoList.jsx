@@ -3,7 +3,7 @@ import RepoListUser from './RepoListUser.jsx';
 
 const RepoList = (props) => (
   <div>
-    <h4> Repo List Component </h4>
+    <h4> Repo List Component: TOP 25 REPOS </h4>
     There are {props.userRepos.length} repos in DB total.
         {props.userRepos.map((repo)=>{
             console.log(repo);

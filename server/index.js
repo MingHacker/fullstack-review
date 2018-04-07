@@ -19,8 +19,9 @@ app.post('/repos', function (req, res) {
   // TODO - your code here!
   // This route should take the github username provided
 
+  // send back to client side total imported repos and updated repos
   console.log('req.body:', req.body);
-  res.json(req.body);
+  res.send({req: req.body, total: 25, update: 10});
 
   // and get the repo information from the github API, then
   git.getReposByUsername(req.body.term);
@@ -46,6 +47,9 @@ app.get('/repos', function (req, res) {
         let removeCount = totalRepos - 25;
         for(var i = 0; i < removeCount; i++){
           user.repos.pop();
+        }
+        if(user.repos.length === 0){
+          repos.pop();
         }
       }
     });

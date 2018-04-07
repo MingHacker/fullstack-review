@@ -1,9 +1,9 @@
 const request = require('request');
 const config = require('../config.js');
 
-let getReposByUsername = (username) => {
+let db = require('../database/index.js');
 
-  let userRepos;
+let getReposByUsername = (username) => {
   
   console.log('username: ', username);
   // TODO - Use the request module to request repos for a specific
@@ -23,13 +23,12 @@ let getReposByUsername = (username) => {
     console.log(response.statusCode);
     if(!error && response.statusCode === 200){
       let info = JSON.parse(body);
-      userRepos = info;
-      console.log('info:', info);
+      // save the repo information in the database
+      db.save(info); 
     }
   };
 
   request(options, callback);
-  
 }
 
 module.exports.getReposByUsername = getReposByUsername;

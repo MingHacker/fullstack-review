@@ -21,7 +21,7 @@ app.post('/repos', function (req, res) {
 
   // send back to client side total imported repos and updated repos
   console.log('req.body:', req.body);
-  res.send({req: req.body, total: 25, update: 10});
+  res.send(req.body);
 
   // and get the repo information from the github API, then
   git.getReposByUsername(req.body.term);

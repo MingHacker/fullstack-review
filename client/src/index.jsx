@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = { 
       userRepos: []
     }
-
+    this.renderRepos = this.renderRepos.bind(this);
   }
 
   // Render everything from DB 
@@ -37,18 +37,19 @@ class App extends React.Component {
       success: (data
       ) => {
         console.log('Data sent. Respond from POST: ', data);
-        this.renderRepos(data);
+        this.renderRepos();
+        
       },
       error: (error) => {
         console.log('POST: Data was not sent', error);
       }
     })
 
-    //this.renderRepos(data);
+    //this.renderRepos();
   }
 
   // fetch all user repos from DB 
-  renderRepos(data){
+  renderRepos(){
 
     //var clientUrl = 'http://127.0.0.1:1128/repos';
 
@@ -61,7 +62,15 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('Data sent. Respond from GET: ', data);
+        // call the GET request until it updates the data -> Mongo DB sucks....
+        if(data.length === this.state.userRepos.length){
+          console.log('Data is the same. Calling again');
+          this.renderRepos();
+          return;
+        }
         this.setState({userRepos: data});
+        console.log(this.state.userRepos);
+        
       },
       error: (error) => {
         console.log('GET: Data was not sent', error);

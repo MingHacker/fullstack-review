@@ -27,7 +27,8 @@ class App extends React.Component {
       headers: {
         'content-type': 'application/json'
       },
-      success: (data) => {
+      success: (data
+      ) => {
         console.log('Data sent. Respond from POST: ', data);
         this.renderRepos(data);
       },

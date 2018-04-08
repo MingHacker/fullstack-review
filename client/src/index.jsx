@@ -13,6 +13,11 @@ class App extends React.Component {
 
   }
 
+  // Render everything from DB 
+  componentDidMount(){
+    this.renderRepos();
+  }
+
   // POST reqest to the server 
   search (term) {
     console.log(`${term} was searched`);
@@ -32,12 +37,14 @@ class App extends React.Component {
       success: (data
       ) => {
         console.log('Data sent. Respond from POST: ', data);
-        this.renderRepos(data);
+        //this.renderRepos(data);
       },
       error: (error) => {
         console.log('POST: Data was not sent', error);
       }
     })
+
+    this.renderRepos(data);
   }
 
   // fetch all user repos from DB 
@@ -65,10 +72,12 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h1>Mo's Github Fetcher</h1>
+        <div>
+          <h1>Mo's Github Fetcher</h1><img src="../pusheen1.png"/>
+        </div>
         <RepoList userRepos={this.state.userRepos}/>
         <Search onSearch={this.search.bind(this)}/>
-    </div>
+      </div>
     )
   };
 }

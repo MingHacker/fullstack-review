@@ -20,7 +20,8 @@ class Search extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (
+    <div id="submit">
       <h4>Add more repos!</h4>
       Enter a github username: <input value={this.state.terms} onChange={(e)=>this.onChange(e)}/>       
       <button onClick={this.search}> Add Repos </button>

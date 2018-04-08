@@ -7,24 +7,24 @@ import RepoList from './components/RepoList.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       userRepos: []
     }
     this.renderRepos = this.renderRepos.bind(this);
   }
 
   // Render everything from DB 
-  componentDidMount(){
+  componentDidMount() {
     this.renderRepos();
   }
 
   // POST reqest to the server 
-  search (term) {
+  search(term) {
     console.log(`${term} was searched`);
 
     //var clientUrl = 'http://127.0.0.1:1128/repos';
 
-    var userData = {term};
+    var userData = { term };
     // send the github handle to the server 
     $.ajax({
       method: 'POST',
@@ -38,7 +38,7 @@ class App extends React.Component {
       ) => {
         console.log('Data sent. Respond from POST: ', data);
         this.renderRepos();
-        
+
       },
       error: (error) => {
         console.log('POST: Data was not sent', error);
@@ -49,7 +49,7 @@ class App extends React.Component {
   }
 
   // fetch all user repos from DB 
-  renderRepos(){
+  renderRepos() {
 
     //var clientUrl = 'http://127.0.0.1:1128/repos';
 
@@ -63,14 +63,14 @@ class App extends React.Component {
       success: (data) => {
         console.log('Data sent. Respond from GET: ', data);
         // call the GET request until it updates the data -> Mongo DB sucks....
-        if(data.length === this.state.userRepos.length){
+        if (data.length === this.state.userRepos.length) {
           console.log('Data is the same. Calling again');
-          this.renderRepos();
+          setTimeout(() => { this.renderRepos() }, 500);
           return;
         }
-        this.setState({userRepos: data});
+        this.setState({ userRepos: data });
         console.log(this.state.userRepos);
-        
+
       },
       error: (error) => {
         console.log('GET: Data was not sent', error);
@@ -78,14 +78,14 @@ class App extends React.Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <div>
         <div>
-          <h1>Mo's Github Fetcher</h1><img src="../pusheen1.png"/>
+          <h1>Mo's Github Fetcher</h1><img src="../pusheen1.png" />
         </div>
-        <RepoList userRepos={this.state.userRepos}/>
-        <Search onSearch={this.search.bind(this)}/>
+        <RepoList userRepos={this.state.userRepos} />
+        <Search onSearch={this.search.bind(this)} />
       </div>
     )
   };

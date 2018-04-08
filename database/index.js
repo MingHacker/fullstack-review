@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const mongoUrl = process.env.MONGOLAB_URI;
-'mongodb://2000prcs:qnddj4097@ds239009.mlab.com:39009/heroku_ghxzj4rx';
-//const PORT = process.env.PORT || 5000;
-mongoose.connect('mongodb://localhost/fetcher' || mongoUrl);
+mongoose.connect(mongoUrl);
+//mongoose.connect('mongodb://localhost/fetcher' || mongoUrl);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));

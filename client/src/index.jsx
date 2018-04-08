@@ -17,12 +17,14 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
 
+    var clientUrl = 'https://peaceful-plains-54630.herokuapp.com' || 'http://127.0.0.1:1128/repos';
+
     var userData = {term};
     // send the github handle to the server 
     $.ajax({
       method: 'POST',
       // if url is not exactly same as '127.0.0.1' -> it will show cross-origin-allow error
-      url: 'http://127.0.0.1:1128/repos',
+      url: clientUrl,
       data: JSON.stringify(userData),
       headers: {
         'content-type': 'application/json'
@@ -40,10 +42,13 @@ class App extends React.Component {
 
   // fetch all user repos from DB 
   renderRepos(data){
+
+    var clientUrl = 'https://peaceful-plains-54630.herokuapp.com' || 'http://127.0.0.1:1128/repos';
+
     $.ajax({
       method: 'GET',
       // if url is not exactly same as '127.0.0.1' -> it will show cross-origin-allow error
-      url: 'http://127.0.0.1:1128/repos',
+      url: clientUrl,
       headers: {
         'content-type': 'application/json'
       },

@@ -38,21 +38,21 @@ app.get('/repos', function (req, res) {
 
     // Send the info from the latest request 
     repos = repos.reverse();
-
-    // if totalRepos is greater than 25, remove the difference from the last user's repos
-    let totalRepos = 0;
-    repos.forEach(user => {
-      totalRepos += user.repos.length;
-      if(totalRepos > 25){
-        let removeCount = totalRepos - 25;
-        for(var i = 0; i < removeCount; i++){
-          user.repos.pop();
-        }
-        if(user.repos.length === 0){
-          repos.pop();
-        }
-      }
-    });
+    //original = repos;
+    // // if totalRepos is greater than 25, remove the difference from the last user's repos
+    // let totalRepos = 0;
+    // repos.forEach(user => {
+    //   totalRepos += user.repos.length;
+    //   if(totalRepos > 25){
+    //     let removeCount = totalRepos - 25;
+    //     for(var i = 0; i < removeCount; i++){
+    //       user.repos.pop();
+    //     }
+    //     if(user.repos.length === 0){
+    //       repos.pop();
+    //     }
+    //   }
+    // });
 
     res.send(repos);
   }); 

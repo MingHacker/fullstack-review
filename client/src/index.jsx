@@ -62,13 +62,30 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('Data sent. Respond from GET: ', data);
+
+        let repos = data;
+        // if totalRepos is greater than 25, remove the difference from the last user's repos
+        let totalRepos = 0;
+        repos.forEach(user => {
+          totalRepos += user.repos.length;
+          if(totalRepos > 25){
+            let removeCount = totalRepos - 25;
+            for(var i = 0; i < removeCount; i++){
+              user.repos.pop();
+            }
+            if(user.repos.length === 0){
+              repos.pop();
+            }
+          }
+        });
+
         // call the GET request until it updates the data -> Mongo DB sucks....
         if (data.length === this.state.userRepos.length) {
           console.log('Data is the same. Calling again');
           setTimeout(() => { this.renderRepos() }, 500);
           return;
         }
-        this.setState({ userRepos: data });
+        this.setState({ userRepos: repos });
         console.log(this.state.userRepos);
 
       },

@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userRepos: []
+      userRepos: [],
+      callCount: 0
     }
     this.renderRepos = this.renderRepos.bind(this);
   }
@@ -37,6 +38,7 @@ class App extends React.Component {
       success: (data
       ) => {
         console.log('Data sent. Respond from POST: ', data);
+        this.setState({callCount: 0});
         this.renderRepos();
 
       },
@@ -74,18 +76,23 @@ class App extends React.Component {
               user.repos.pop();
             }
             if(user.repos.length === 0){
-              repos.pop();
+              let userIndex = repos.indexOf(user);
+              repos.splice(userIndex, 1);
             }
           }
         });
 
         // call the GET request until it updates the data -> Mongo DB sucks....
-        if (data.length === this.state.userRepos.length) {
+        if (JSON.stringify(data) === JSON.stringify(this.state.userRepos)) {
+          if(this.state.callCount === 5){return;}
           console.log('Data is the same. Calling again');
           setTimeout(() => { this.renderRepos() }, 500);
+          let count = this.state.callCount;
+          count++;
+          this.setState({callCount: count});
           return;
         }
-        this.setState({ userRepos: repos });
+        this.setState({ userRepos: data });
         console.log(this.state.userRepos);
 
       },

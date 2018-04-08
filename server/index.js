@@ -37,8 +37,8 @@ app.get('/repos', function (req, res) {
     console.log('In the server:', repos);
 
     // Send the info from the latest request 
-    repos = repos.reverse();
-    //original = repos;
+    // repos = repos.reverse();
+
     // // if totalRepos is greater than 25, remove the difference from the last user's repos
     // let totalRepos = 0;
     // repos.forEach(user => {

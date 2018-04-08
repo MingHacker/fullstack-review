@@ -75,10 +75,11 @@ let save = (info) => {
 };
 
 // find all info from DB 
+// sort by objectID : descending
 let find = function(callback) {
-  Repo.find((err, repos)=>{
+  Repo.find().limit(5).sort({_id: -1}).exec((err, repos)=>{
   if(err) return console.error(err);
-  console.log('repos: ', repos);
+  console.log('25 users from DB', repos);
   callback(repos);
   });
 }

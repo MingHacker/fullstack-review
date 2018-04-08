@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/fetcher';
-//mongoose.connect(mongoUrl);
 mongoose.connect(mongoUrl);
 
 const db = mongoose.connection;

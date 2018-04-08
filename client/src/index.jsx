@@ -17,7 +17,7 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
 
-    var clientUrl = 'https://peaceful-plains-54630.herokuapp.com' || 'http://127.0.0.1:1128/repos';
+    var clientUrl = 'http://127.0.0.1:1128/repos';
 
     var userData = {term};
     // send the github handle to the server 
@@ -43,7 +43,7 @@ class App extends React.Component {
   // fetch all user repos from DB 
   renderRepos(data){
 
-    var clientUrl = 'https://peaceful-plains-54630.herokuapp.com' || 'http://127.0.0.1:1128/repos';
+    var clientUrl = 'http://127.0.0.1:1128/repos';
 
     $.ajax({
       method: 'GET',

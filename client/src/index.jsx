@@ -37,14 +37,14 @@ class App extends React.Component {
       success: (data
       ) => {
         console.log('Data sent. Respond from POST: ', data);
-        //this.renderRepos(data);
+        this.renderRepos(data);
       },
       error: (error) => {
         console.log('POST: Data was not sent', error);
       }
     })
 
-    this.renderRepos(data);
+    //this.renderRepos(data);
   }
 
   // fetch all user repos from DB 
